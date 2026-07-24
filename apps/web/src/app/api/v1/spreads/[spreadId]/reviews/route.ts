@@ -1,4 +1,2 @@
-import { createReviewRequest } from '@/features/spread-manager/service';
-import { reviewRequestSchema } from '@/features/spread-manager/schemas';
-import { requirePermission, response, errorResponse } from '@/lib/spread-manager-server';
-export async function POST(request:Request,{params}:{params:Promise<{spreadId:string}>}){try{const actor=await requirePermission('review.request');const {spreadId}=await params;return response(await createReviewRequest(actor,spreadId,reviewRequestSchema.parse(await request.json())),201)}catch(e){return errorResponse(e)}}
+import {NextResponse} from 'next/server';import {readSession} from '@/lib/platform/identity';import {listReviews} from '@/features/reviews/review-service';
+export async function GET(request:Request,{params}:{params:Promise<{spreadId:string}>}){const requestId=request.headers.get('x-request-id')??crypto.randomUUID();try{const identity=await readSession(request);if(!identity?.organisationId)return NextResponse.json({error:{code:'UNAUTHENTICATED'},requestId},{status:401});const {spreadId}=await params;return NextResponse.json({data:await listReviews(identity,spreadId),requestId})}catch(error){const forbidden=String(error).includes('FORBIDDEN');return NextResponse.json({error:{code:forbidden?'FORBIDDEN':'REVIEWS_LOAD_FAILED'},requestId},{status:forbidden?403:500})}}

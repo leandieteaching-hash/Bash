@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")/../../.." && pwd)"
+test -f "$ROOT/database/migrations/026_review_comments_annotations.sql"
+grep -q "create table if not exists review_cycles" "$ROOT/database/migrations/026_review_comments_annotations.sql"
+grep -q "create table if not exists spread_annotations" "$ROOT/database/migrations/026_review_comments_annotations.sql"
+grep -q "review_comments" "$ROOT/database/migrations/026_review_comments_annotations.sql"
+grep -q "resolve_spread_annotation" "$ROOT/database/migrations/026_review_comments_annotations.sql"
+grep -q "reviews.resolve" "$ROOT/database/migrations/026_review_comments_annotations.sql"
+test -f "$ROOT/apps/web/src/features/reviews/ReviewPanel.tsx"
+test -f "$ROOT/apps/web/src/app/api/v1/spreads/[spreadId]/annotations/route.ts"
+test -f "$ROOT/apps/web/src/app/api/v1/spreads/[spreadId]/annotations/[annotationId]/comments/route.ts"
+grep -q "ReviewPanel" "$ROOT/apps/web/src/features/spread-editor/VisualSpreadEditor.tsx"
+grep -q "annotation.created" "$ROOT/apps/web/src/features/reviews/review-service.ts"
+echo "Review comments and annotations checks passed."
