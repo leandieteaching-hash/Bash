@@ -1,0 +1,6 @@
+10020	WARN	X-Frame-Options is supplemented by CSP frame-ancestors
+10021	FAIL	X-Content-Type-Options must be present
+10023	WARN	Information disclosure requires manual review
+10038	FAIL	Content-Security-Policy must be present
+10054	FAIL	Cookie without SameSite attribute
+10096	WARN	Timestamp disclosure requires manual review

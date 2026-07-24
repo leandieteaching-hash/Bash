@@ -1,0 +1,17 @@
+name: Staging DAST
+on:
+  workflow_dispatch:
+    inputs:
+      target_url: { description: Approved staging URL, required: true, type: string }
+permissions:
+  contents: read
+jobs:
+  zap-baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: zaproxy/action-baseline@v0.12.0
+        with:
+          target: '${{ inputs.target_url }}'
+          rules_file_name: '.zap-rules.tsv'
+          cmd_options: '-a -j'
