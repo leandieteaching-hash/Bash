@@ -1,0 +1,1 @@
+{"name":"@studio-os/permissions","version":"1.0.0-alpha.1","private":true,"type":"module","exports":"./src/index.ts","scripts":{"typecheck":"tsc --noEmit"},"devDependencies":{"typescript":"^5.8.3"}}

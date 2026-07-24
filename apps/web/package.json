@@ -18,8 +18,9 @@
     "test:reports": "bash tests/reports-analytics.sh",
     "test:operations": "bash tests/production-operations.sh",
     "test:foundation": "bash tests/platform-foundation.sh",
-    "test:release": "npm run test:foundation && npm run test:shell && npm run test:operations && npm run test:assets && npm run test:reports",
-    "test": "npm run test:release"
+    "test:release": "npm run test:identity && npm run test:foundation && npm run test:shell && npm run test:operations && npm run test:assets && npm run test:reports",
+    "test": "npm run test:release",
+    "test:identity": "bash tests/identity-tenancy-rbac.sh"
   },
   "dependencies": {
     "@supabase/ssr": "^0.6.1",
@@ -28,7 +29,10 @@
     "next": "^15.4.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "zod": "^3.24.1"
+    "zod": "^3.24.1",
+    "@studio-os/auth": "workspace:*",
+    "@studio-os/tenancy": "workspace:*",
+    "@studio-os/permissions": "workspace:*"
   },
   "devDependencies": {
     "@playwright/test": "^1.54.1",
