@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 : "${DATABASE_URL:?DATABASE_URL is required}"
-DEST=${BACKUP_DESTINATION:-./backups}; mkdir -p "$DEST"; TS=$(date -u +%Y%m%dT%H%M%SZ); FILE="$DEST/studio-os-$TS.dump"
-pg_dump --format=custom --no-owner --no-acl "$DATABASE_URL" > "$FILE"
-sha256sum "$FILE" > "$FILE.sha256"
-echo "Created $FILE"
+: "${BACKUP_DIR:?BACKUP_DIR is required}"
+command -v pg_dump >/dev/null || { echo 'pg_dump is required' >&2; exit 1; }
+mkdir -p "$BACKUP_DIR"
+stamp="$(date -u +%Y%m%dT%H%M%SZ)"
+out="$BACKUP_DIR/studio-os-$stamp.dump"
+pg_dump "$DATABASE_URL" --format=custom --no-owner --no-acl --file="$out"
+sha256sum "$out" > "$out.sha256"
+echo "$out"

@@ -20,7 +20,13 @@
     "test": "npm run test --workspaces --if-present",
     "test:release": "npm run test:release --workspace=@studio-os/web",
     "verify": "npm run format:check && npm run lint && npm run typecheck && npm run build && npm run test:release",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test:integration": "bash tests/integration/migrations.sh",
+    "test:performance": "k6 run tests/performance/smoke.js",
+    "security:static": "bash scripts/security/static-review.sh",
+    "security:dependencies": "bash scripts/security/dependency-scan.sh",
+    "verify:lockfile": "bash scripts/ci/verify-lockfile.sh",
+    "verify:production": "npm run verify:lockfile && npm run format:check && npm run lint && npm run typecheck && npm run test:release && npm run build"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",

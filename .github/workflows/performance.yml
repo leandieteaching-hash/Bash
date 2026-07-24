@@ -1,0 +1,16 @@
+name: Performance
+on:
+  workflow_dispatch:
+    inputs:
+      base_url: { description: Deployed staging URL, required: true, type: string }
+jobs:
+  k6:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: grafana/setup-k6-action@v1
+      - uses: grafana/run-k6-action@v1
+        with:
+          path: tests/performance/smoke.js
+        env:
+          BASE_URL: '${{ inputs.base_url }}'
