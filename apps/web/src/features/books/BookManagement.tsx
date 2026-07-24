@@ -1,0 +1,12 @@
+'use client';
+import {FormEvent,useEffect,useState} from 'react';import Link from 'next/link';import type {BookSummary} from './types';
+export function BookManagement(){
+ const [books,setBooks]=useState<BookSummary[]>([]);const [loading,setLoading]=useState(true);const [error,setError]=useState('');const [creating,setCreating]=useState(false);
+ async function load(){setLoading(true);const response=await fetch('/api/v1/books');const payload=await response.json();if(!response.ok){setError(payload.error?.code??'Unable to load books');setLoading(false);return}setBooks(payload.data);setLoading(false)}
+ useEffect(()=>{void load()},[]);
+ async function create(event:FormEvent<HTMLFormElement>){event.preventDefault();setCreating(true);setError('');const form=new FormData(event.currentTarget);const response=await fetch('/api/v1/books',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({code:form.get('code'),title:form.get('title'),subtitle:form.get('subtitle')||undefined,language:form.get('language')})});const payload=await response.json();if(!response.ok){setError(payload.error?.code??'Unable to create book');setCreating(false);return}window.location.assign(`/books/${payload.data.id}/overview`)}
+ return <div className="grid">
+  <section className="card span4"><h2>Create book</h2><p className="muted">Start a publication with an initial edition.</p><form onSubmit={create} className="stack"><label>Book code<input name="code" required pattern="[A-Z0-9_-]+" placeholder="MATH-G3"/></label><label>Title<input name="title" required placeholder="Grade 3 Mathematics"/></label><label>Subtitle<input name="subtitle" placeholder="Learner's book"/></label><label>Language<input name="language" defaultValue="en-ZA" required/></label><button className="button buttonPrimary" disabled={creating}>{creating?'Creating…':'Create book'}</button>{error&&<p role="alert">{error}</p>}</form></section>
+  <section className="card span8"><h2>Book portfolio</h2>{loading?<p>Loading books…</p>:books.length===0?<div><h3>No books yet</h3><p className="muted">Create the first book in this organisation.</p></div>:<div className="bookGrid">{books.map(book=><Link className="bookCard" key={book.id} href={`/books/${book.id}/overview`}><div className="cover">📘</div><div className="cardBody"><p className="muted">{book.code}</p><h3>{book.title}</h3><p>{book.subtitle}</p><p><strong>{book.lifecycle_stage}</strong> · {book.status}</p></div></Link>)}</div>}</section>
+ </div>
+}
