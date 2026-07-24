@@ -1,2 +1,2 @@
 import {VisualSpreadEditor} from '@/features/spread-editor/VisualSpreadEditor';
-export default async function Page({params}:{params:Promise<{spreadId:string}>}){const {spreadId}=await params;return <main><h1>Visual spread editor</h1><p>Place text, shapes, and assets on the spread canvas. Changes autosave with optimistic concurrency.</p><VisualSpreadEditor spreadId={spreadId}/></main>}
+export default async function Page({params}:{params:Promise<{bookId:string;spreadId:string}>}){const {bookId,spreadId}=await params;return <main><h1>Visual spread editor</h1><p>Place and precisely arrange text, shapes, and versioned assets. Changes autosave with revision history.</p><VisualSpreadEditor spreadId={spreadId} bookId={bookId}/></main>}
