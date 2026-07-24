@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")/../../.." && pwd)"
+test -f "$ROOT/database/migrations/027_approval_workflow.sql"
+grep -q "create table if not exists approval_workflows" "$ROOT/database/migrations/027_approval_workflow.sql"
+grep -q "create table if not exists approval_stages" "$ROOT/database/migrations/027_approval_workflow.sql"
+grep -q "create table if not exists approval_decisions" "$ROOT/database/migrations/027_approval_workflow.sql"
+grep -q "decide_approval_stage" "$ROOT/database/migrations/027_approval_workflow.sql"
+grep -q "approvals.decide" "$ROOT/database/migrations/027_approval_workflow.sql"
+test -f "$ROOT/apps/web/src/features/approvals/ApprovalPanel.tsx"
+test -f "$ROOT/apps/web/src/app/api/v1/spreads/[spreadId]/approvals/route.ts"
+test -f "$ROOT/apps/web/src/app/api/v1/spreads/[spreadId]/approvals/workflows/route.ts"
+test -f "$ROOT/apps/web/src/app/api/v1/spreads/[spreadId]/approvals/assignments/[assignmentId]/decision/route.ts"
+grep -q "ApprovalPanel" "$ROOT/apps/web/src/features/spread-editor/VisualSpreadEditor.tsx"
+grep -q "approval.workflow.created" "$ROOT/apps/web/src/features/approvals/approval-service.ts"
+echo "Approval workflow checks passed."
