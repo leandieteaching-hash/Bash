@@ -1,0 +1,5 @@
+'use client';
+import {FormEvent,useState} from 'react';
+export function RoleCreator(){const [name,setName]=useState(''),[code,setCode]=useState(''),[message,setMessage]=useState('');
+ async function submit(event:FormEvent){event.preventDefault();setMessage('Saving…');const response=await fetch('/api/v1/rbac/roles',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name,code,description:`Custom organisation role: ${name}`})});if(!response.ok){setMessage('Role creation failed.');return}setName('');setCode('');setMessage('Role created. Refresh to edit its permissions.');}
+ return <form className="card" onSubmit={submit}><h2>Create role</h2><div className="formGrid"><label>Role name<input required value={name} onChange={e=>{setName(e.target.value);if(!code)setCode(e.target.value.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''))}}/></label><label>Role code<input required pattern="[a-z0-9._-]+" value={code} onChange={e=>setCode(e.target.value)}/></label></div><button className="button primary" type="submit">Create role</button>{message&&<p aria-live="polite">{message}</p>}</form>}
