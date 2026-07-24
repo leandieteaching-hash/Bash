@@ -18,9 +18,10 @@
     "test:reports": "bash tests/reports-analytics.sh",
     "test:operations": "bash tests/production-operations.sh",
     "test:foundation": "bash tests/platform-foundation.sh",
-    "test:release": "npm run test:identity && npm run test:foundation && npm run test:shell && npm run test:operations && npm run test:assets && npm run test:reports",
+    "test:release": "npm run test:auth && npm run test:identity && npm run test:foundation && npm run test:shell && npm run test:operations && npm run test:assets && npm run test:reports",
     "test": "npm run test:release",
-    "test:identity": "bash tests/identity-tenancy-rbac.sh"
+    "test:identity": "bash tests/identity-tenancy-rbac.sh",
+    "test:auth": "bash tests/email-password-auth.sh"
   },
   "dependencies": {
     "@supabase/ssr": "^0.6.1",

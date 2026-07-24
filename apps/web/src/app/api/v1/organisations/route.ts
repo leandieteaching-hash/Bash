@@ -7,8 +7,8 @@ import {listOrganisations, readSession} from '@/lib/platform/identity';
 export async function GET(request: Request) {
   const context = getRequestContext(request);
   try {
-    const session = requireAuthenticated(readSession(request));
-    return NextResponse.json({data: listOrganisations(session.userId), requestId: context.requestId}, {headers: {'x-request-id': context.requestId}});
+    const session = requireAuthenticated(await readSession(request));
+    return NextResponse.json({data: await listOrganisations(session.userId), requestId: context.requestId}, {headers: {'x-request-id': context.requestId}});
   } catch (error) {
     return apiError(error, context.requestId);
   }

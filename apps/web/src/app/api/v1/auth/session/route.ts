@@ -7,7 +7,7 @@ import {readSession} from '@/lib/platform/identity';
 export async function GET(request: Request) {
   const context = getRequestContext(request);
   try {
-    const session = requireAuthenticated(readSession(request));
+    const session = requireAuthenticated(await readSession(request));
     return NextResponse.json({data: session, requestId: context.requestId}, {headers: {'x-request-id': context.requestId}});
   } catch (error) {
     return apiError(error, context.requestId);

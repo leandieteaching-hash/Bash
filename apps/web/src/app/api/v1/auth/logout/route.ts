@@ -1,17 +1,13 @@
 import {NextResponse} from 'next/server';
-import {requireAuthenticated} from '@studio-os/auth';
-import {writeAudit} from '@/lib/platform/audit';
-import {getRequestContext} from '@/lib/platform/context';
-import {apiError} from '@/lib/platform/http';
-import {readSession} from '@/lib/platform/identity';
+import {clearAuthCookies, readCookie} from '@/lib/auth/cookies';
+import {SESSION_COOKIE} from '@/lib/auth/config';
+import {revokeSession} from '@/lib/auth/service';
 
 export async function POST(request: Request) {
-  const context = getRequestContext(request);
-  try {
-    const session = requireAuthenticated(readSession(request));
-    writeAudit(context, {action: 'identity.session.revoked', resourceType: 'session', resourceId: session.sessionId, metadata: {reason: 'logout'}});
-    return NextResponse.json({data: {revoked: true}, requestId: context.requestId}, {headers: {'x-request-id': context.requestId}});
-  } catch (error) {
-    return apiError(error, context.requestId);
-  }
+  const requestId = request.headers.get('x-request-id') ?? crypto.randomUUID();
+  const sessionId = readCookie(request, SESSION_COOKIE);
+  if (sessionId) await revokeSession(sessionId).catch(() => undefined);
+  const response = NextResponse.json({data: {revoked: true}, requestId});
+  clearAuthCookies(response);
+  return response;
 }
