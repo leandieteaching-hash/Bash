@@ -36,9 +36,9 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "zod": "^3.24.1",
-    "@studio-os/auth": "workspace:*",
-    "@studio-os/tenancy": "workspace:*",
-    "@studio-os/permissions": "workspace:*"
+    "@studio-os/auth": "*",
+    "@studio-os/tenancy": "*",
+    "@studio-os/permissions": "*"
   },
   "devDependencies": {
     "@playwright/test": "^1.54.1",
