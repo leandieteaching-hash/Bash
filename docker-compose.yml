@@ -1,0 +1,26 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: studio_os
+      POSTGRES_USER: studio_os
+      POSTGRES_PASSWORD: studio_os
+    ports:
+      - '5432:5432'
+    volumes:
+      - studio_os_postgres:/var/lib/postgresql/data
+      - ./database/migrations:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U studio_os -d studio_os']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  mailpit:
+    image: axllent/mailpit:v1.20
+    ports:
+      - '1025:1025'
+      - '8025:8025'
+
+volumes:
+  studio_os_postgres:

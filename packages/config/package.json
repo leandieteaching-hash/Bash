@@ -1,0 +1,6 @@
+{
+  "name": "@studio-os/config",
+  "version": "1.0.0-alpha.1",
+  "private": true,
+  "files": ["eslint", "typescript"]
+}

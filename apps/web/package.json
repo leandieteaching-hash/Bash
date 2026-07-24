@@ -18,7 +18,8 @@
     "test:reports": "bash tests/reports-analytics.sh",
     "test:operations": "bash tests/production-operations.sh",
     "test:foundation": "bash tests/platform-foundation.sh",
-    "test:release": "npm run test:foundation && npm run test:shell && npm run test:operations && npm run test:assets && npm run test:reports"
+    "test:release": "npm run test:foundation && npm run test:shell && npm run test:operations && npm run test:assets && npm run test:reports",
+    "test": "npm run test:release"
   },
   "dependencies": {
     "@supabase/ssr": "^0.6.1",
@@ -35,6 +36,7 @@
     "@types/react": "^19.0.6",
     "@types/react-dom": "^19.0.3",
     "dotenv": "^16.6.1",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "@eslint/eslintrc": "^3.3.1"
   }
 }
