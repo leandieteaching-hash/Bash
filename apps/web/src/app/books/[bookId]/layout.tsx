@@ -1,0 +1,1 @@
+import {BookWorkspaceHeader} from '@/components/workspace/BookWorkspace';export default async function BookLayout({children,params}:{children:React.ReactNode;params:Promise<{bookId:string}>}){const{bookId}=await params;return <><BookWorkspaceHeader bookId={bookId}/>{children}</>}

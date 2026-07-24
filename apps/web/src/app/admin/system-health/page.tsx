@@ -1,0 +1,2 @@
+import {Breadcrumbs,PageHeader} from '@/components/layout/Page';import {OperationsDashboard} from '@/features/operations/OperationsDashboard';
+export default function Page(){return <><Breadcrumbs items={[{label:'Dashboard',href:'/dashboard'},{label:'Administration',href:'/admin'},{label:'System Health'}]}/><PageHeader title="System Health" description="Monitoring, backups, deployments, security, metrics and alerting."/><OperationsDashboard/></>}

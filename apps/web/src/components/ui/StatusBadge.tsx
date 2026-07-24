@@ -1,0 +1,1 @@
+export function StatusBadge({status}:{status:string}){const tone=/approved|complete|resolved/i.test(status)?'success':/blocked|revoked|locked/i.test(status)?'danger':/review|progress|pending/i.test(status)?'warning':'';return <span className={`badge ${tone}`}>{status}</span>}

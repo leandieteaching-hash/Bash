@@ -1,0 +1,11 @@
+BEGIN;
+ALTER TABLE spreads ADD COLUMN IF NOT EXISTS locked_by uuid REFERENCES users(id), ADD COLUMN IF NOT EXISTS lock_reason text;
+ALTER TABLE review_requests ADD COLUMN IF NOT EXISTS completed_at timestamptz;
+ALTER TABLE review_comments ADD COLUMN IF NOT EXISTS resolution_note text, ADD COLUMN IF NOT EXISTS resolved_by uuid REFERENCES users(id), ADD COLUMN IF NOT EXISTS resolved_at timestamptz;
+ALTER TABLE approvals ADD COLUMN IF NOT EXISTS revoked_by uuid REFERENCES users(id), ADD COLUMN IF NOT EXISTS revocation_reason text;
+CREATE UNIQUE INDEX IF NOT EXISTS uq_asset_version_number ON asset_versions(asset_id,version_number);
+CREATE UNIQUE INDEX IF NOT EXISTS uq_asset_one_current_version ON asset_versions(asset_id) WHERE is_current=true;
+CREATE UNIQUE INDEX IF NOT EXISTS uq_active_asset_approval ON approvals(entity_id,asset_version_id,approval_type) WHERE entity_type='Asset' AND decision='Approved' AND revoked_at IS NULL;
+CREATE INDEX IF NOT EXISTS idx_review_requests_open_version ON review_requests(asset_version_id,assigned_reviewer) WHERE status='Open';
+CREATE INDEX IF NOT EXISTS idx_review_comments_required_open ON review_comments(review_id) WHERE severity='Required Change' AND is_resolved=false;
+COMMIT;

@@ -1,0 +1,18 @@
+groups:
+  - name: studio-os
+    rules:
+      - alert: StudioOSUnavailable
+        expr: studio_os_up == 0
+        for: 2m
+        labels: { severity: critical }
+        annotations: { summary: "Studio OS is unavailable" }
+      - alert: StudioOSHighErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) / rate(http_requests_total[5m]) > 0.02
+        for: 10m
+        labels: { severity: warning }
+        annotations: { summary: "Studio OS error rate exceeds 2%" }
+      - alert: StudioOSBackupStale
+        expr: time() - studio_os_last_verified_backup_timestamp > 90000
+        for: 15m
+        labels: { severity: critical }
+        annotations: { summary: "No verified backup within 25 hours" }

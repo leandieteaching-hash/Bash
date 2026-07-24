@@ -1,0 +1,2 @@
+import {NextResponse} from 'next/server';import {getRequestContext,requireRole} from '@/lib/platform/context';import {listAudit} from '@/lib/platform/audit';
+export async function GET(request:Request){try{const context=getRequestContext(request);requireRole(context,['platform_admin','auditor']);return NextResponse.json({items:listAudit(context.tenantId),requestId:context.requestId})}catch{return NextResponse.json({error:'FORBIDDEN'},{status:403})}}

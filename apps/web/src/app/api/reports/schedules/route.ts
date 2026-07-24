@@ -1,0 +1,3 @@
+import {NextResponse} from 'next/server';import {z} from 'zod';
+const schema=z.object({name:z.string().min(2),dashboard:z.enum(['production','team','review','workload','executive']),cadence:z.enum(['daily','weekly','monthly']),deliveryTime:z.string(),recipients:z.array(z.string().email()).min(1),format:z.enum(['csv','pdf']),enabled:z.boolean()});
+export async function POST(request:Request){const parsed=schema.safeParse(await request.json());if(!parsed.success)return NextResponse.json({error:'Invalid schedule',details:parsed.error.flatten()},{status:400});return NextResponse.json({id:crypto.randomUUID(),...parsed.data,nextRunAt:new Date(Date.now()+86400000).toISOString()},{status:201});}

@@ -1,0 +1,2 @@
+import {NextResponse} from 'next/server';import {getRequestContext} from '@/lib/platform/context';
+export async function GET(request:Request){const context=getRequestContext(request);return NextResponse.json({status:'operational',version:'1.0.0',requestId:context.requestId,tenantId:context.tenantId,services:{identity:'operational',database:'operational',storage:'operational',events:'operational',audit:'operational'},timestamp:new Date().toISOString()},{headers:{'x-request-id':context.requestId}})}

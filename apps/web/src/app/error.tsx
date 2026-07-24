@@ -1,0 +1,1 @@
+'use client';export default function ErrorPage({reset}:{reset:()=>void}){return <div className="empty"><h1>Something went wrong</h1><p className="muted">The error was contained by the application boundary.</p><button className="button buttonPrimary" onClick={reset}>Try again</button></div>}

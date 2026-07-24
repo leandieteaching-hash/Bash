@@ -1,0 +1,40 @@
+{
+  "name": "@studio-os/web",
+  "version": "1.0.0-alpha.1",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test:db": "bash tests/database/run.sh",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:ui": "playwright test --ui",
+    "test:shell": "bash tests/application-shell.sh",
+    "test:workflow": "npm run test:db && npm run test:e2e",
+    "test:assets": "bash tests/asset-library.sh",
+    "test:reports": "bash tests/reports-analytics.sh",
+    "test:operations": "bash tests/production-operations.sh",
+    "test:foundation": "bash tests/platform-foundation.sh",
+    "test:release": "npm run test:foundation && npm run test:shell && npm run test:operations && npm run test:assets && npm run test:reports"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.6.1",
+    "@supabase/supabase-js": "^2.52.1",
+    "lucide-react": "^0.468.0",
+    "next": "^15.4.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.54.1",
+    "@types/node": "^22.10.5",
+    "@types/react": "^19.0.6",
+    "@types/react-dom": "^19.0.3",
+    "dotenv": "^16.6.1",
+    "typescript": "^5.8.3"
+  }
+}

@@ -1,0 +1,1 @@
+import Link from 'next/link';export default function NotFound(){return <div className="empty"><h1>Page not found</h1><p className="muted">The Studio OS page could not be found.</p><Link className="button buttonPrimary" href="/dashboard">Return to dashboard</Link></div>}

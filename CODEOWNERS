@@ -1,0 +1,4 @@
+* @studio-os/core
+/database/migrations/ @studio-os/database
+/.github/workflows/ @studio-os/platform
+/infrastructure/ @studio-os/platform

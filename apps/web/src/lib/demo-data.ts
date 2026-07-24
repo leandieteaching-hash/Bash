@@ -1,0 +1,4 @@
+export const demoBook={id:'meet-mia',title:'Meet Mia',subtitle:'Picture Book · In Production',progress:42,spreads:24,pendingReviews:5,openTasks:8};
+export const books=[demoBook,{id:'little-elephant',title:'The Little Elephant',subtitle:'Picture Book · Planning',progress:18,spreads:20,pendingReviews:2,openTasks:12},{id:'first-numbers',title:'My First Numbers',subtitle:'Activity Book · Review',progress:76,spreads:32,pendingReviews:7,openTasks:4}];
+export const spreads=Array.from({length:24},(_,i)=>({id:`spread-${i+1}`,number:i+1,status:i<10?'Approved':i<16?'In review':i<20?'In progress':'Not started',progress:i<10?100:i<16?75:i<20?42:0,locked:i===7}));
+export const activity=['Version 4 uploaded to Spread 08 illustration','Review completed by Anna Smit','Required change resolved on Spread 06','Decision approved: Mia’s coat remains yellow','Spread 08 locked for final approval'];

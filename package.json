@@ -1,0 +1,21 @@
+{
+  "name": "studio-os",
+  "version": "1.0.0-alpha.1",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=@studio-os/web",
+    "lint": "npm run lint --workspace=@studio-os/web",
+    "typecheck": "npm run typecheck --workspace=@studio-os/web",
+    "build": "npm run build --workspace=@studio-os/web",
+    "test:release": "npm run test:release --workspace=@studio-os/web",
+    "verify": "npm run lint && npm run typecheck && npm run build && npm run test:release"
+  },
+  "engines": {
+    "node": ">=20.11.0",
+    "npm": ">=10.2.0"
+  }
+}

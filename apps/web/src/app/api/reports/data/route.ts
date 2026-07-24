@@ -1,0 +1,3 @@
+import {NextResponse} from 'next/server';import {z} from 'zod';import {getDemoDashboard} from '@/features/reports/demo-reports';
+const schema=z.object({kind:z.enum(['production','team','review','workload','executive']),filters:z.object({bookId:z.string().optional(),dateRange:z.enum(['30d','90d','6m','12m']),team:z.string().optional(),status:z.string().optional()})});
+export async function POST(request:Request){const parsed=schema.safeParse(await request.json());if(!parsed.success)return NextResponse.json({error:'Invalid report request'},{status:400});return NextResponse.json(getDemoDashboard(parsed.data.kind));}

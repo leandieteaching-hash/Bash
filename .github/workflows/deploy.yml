@@ -1,0 +1,20 @@
+name: Deploy
+on:
+  workflow_dispatch:
+    inputs:
+      environment: { description: Environment, required: true, type: choice, options: [staging, production] }
+concurrency: { group: "deploy-${{ inputs.environment }}", cancel-in-progress: false }
+jobs:
+  deploy:
+    environment: ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci && npm run build
+      - name: Deploy adapter
+        run: ./ops/scripts/deploy.sh "${{ inputs.environment }}"
+      - name: Smoke test
+        run: curl --fail --retry 8 --retry-delay 10 "$HEALTH_URL/api/operations/health"
+        env: { HEALTH_URL: "${{ secrets.HEALTH_URL }}" }

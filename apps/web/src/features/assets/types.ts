@@ -1,0 +1,9 @@
+export type AssetType='illustration'|'character'|'environment'|'layout'|'reference'|'cover'|'document';
+export type ReviewStatus='draft'|'in_review'|'changes_requested'|'approved';
+export type LifecycleStatus='active'|'archived'|'cold_storage'|'scheduled_deletion';
+export type AssetVersion={id:string;version:number;filename:string;mimeType:string;sizeBytes:number;width?:number;height?:number;storagePath:string;thumbnailUrl?:string;createdAt:string;createdBy:string;reviewStatus:ReviewStatus;isCurrent:boolean;checksum?:string};
+export type AssetUsage={id:string;contextType:'spread'|'character'|'environment'|'export';contextId:string;label:string;usageRole:string;updatedAt:string};
+export type AssetRelationship={id:string;targetAssetId:string;targetTitle:string;type:'variant_of'|'derived_from'|'references'|'companion_to'};
+export type Asset={id:string;bookId:string;title:string;description?:string;type:AssetType;tags:string[];collectionIds:string[];owner:string;createdAt:string;updatedAt:string;reviewStatus:ReviewStatus;lifecycleStatus:LifecycleStatus;currentVersion:AssetVersion;versions:AssetVersion[];usage:AssetUsage[];relationships:AssetRelationship[]};
+export type AssetCollection={id:string;name:string;description?:string;assetCount:number};
+export type AssetFilters={query:string;types:AssetType[];statuses:ReviewStatus[];tags:string[];collectionId?:string;lifecycle?:LifecycleStatus};
