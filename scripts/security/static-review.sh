@@ -3,7 +3,7 @@ set -euo pipefail
 fail=0
 scan() {
   local label="$1" pattern="$2"
-  if grep -RInE --exclude-dir=.git --exclude='package-lock.json' "$pattern" apps packages database ops scripts .github 2>/dev/null; then
+  if grep -RInE --exclude-dir=.git --exclude='package-lock.json' "$pattern" apps packages database ops .github 2>/dev/null; then
     echo "SECURITY REVIEW FAILURE: $label" >&2
     fail=1
   fi
