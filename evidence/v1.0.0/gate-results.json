@@ -1,0 +1,20 @@
+{
+  "release": "v1.0.0",
+  "decision": "no-go",
+  "mandatory": {
+    "verified_lockfile": "blocked",
+    "clean_install": "blocked",
+    "lint": "blocked",
+    "typecheck": "blocked",
+    "unit_tests": "blocked",
+    "integration_tests": "blocked",
+    "production_build": "blocked",
+    "accessibility_audit": "partially_passed",
+    "migration_rehearsal": "blocked",
+    "staging_e2e": "blocked",
+    "performance": "blocked",
+    "dast": "blocked",
+    "backup_restore": "blocked",
+    "rollback_rehearsal": "blocked"
+  }
+}
