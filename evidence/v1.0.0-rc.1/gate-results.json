@@ -1,0 +1,23 @@
+{
+  "release": "v1.0.0-rc.1",
+  "decision": "no-go",
+  "gates": [
+    {"id":"repository-history","mandatory":true,"status":"passed","evidence":"PR-006 through PR-008 provenance commits are on main."},
+    {"id":"verified-lockfile","mandatory":true,"status":"blocked","evidence":"Registry HTTP 503; no package-lock.json exists and npm cache is empty."},
+    {"id":"npm-ci","mandatory":true,"status":"blocked","evidence":"Cannot run without a verified lockfile and reachable registry."},
+    {"id":"lint","mandatory":true,"status":"blocked","evidence":"ESLint dependencies are not installed."},
+    {"id":"typecheck","mandatory":true,"status":"blocked","evidence":"TypeScript dependencies are not installed."},
+    {"id":"unit-and-structural-tests","mandatory":true,"status":"passed","evidence":"npm run test:release passed on 2026-07-26."},
+    {"id":"database-integration","mandatory":true,"status":"blocked","evidence":"No PostgreSQL client or isolated database service is available."},
+    {"id":"production-build","mandatory":true,"status":"blocked","evidence":"Next.js dependencies are not installed."},
+    {"id":"staging-deployment","mandatory":true,"status":"blocked","evidence":"No staging cluster, immutable image, registry credentials, or kubectl is available."},
+    {"id":"playwright-e2e","mandatory":true,"status":"blocked","evidence":"Playwright package and browser binaries are not installed; no staging target is available."},
+    {"id":"backup-restore-drill","mandatory":true,"status":"blocked","evidence":"No PostgreSQL tooling or authorised backup target is available."},
+    {"id":"performance-k6","mandatory":true,"status":"blocked","evidence":"k6 is unavailable and no staging endpoint is configured."},
+    {"id":"owasp-zap","mandatory":true,"status":"blocked","evidence":"No authorised staging endpoint or ZAP runtime is available."},
+    {"id":"static-security-review","mandatory":true,"status":"passed","evidence":"npm run security:static passed on 2026-07-26."},
+    {"id":"dependency-scan","mandatory":true,"status":"blocked","evidence":"Requires installed dependency tree and registry access."},
+    {"id":"penetration-test","mandatory":true,"status":"blocked","evidence":"Requires an authorised deployed environment and independent tester."},
+    {"id":"signed-evidence-and-tag","mandatory":true,"status":"blocked","evidence":"No release signing identity is available; tag is intentionally not created while mandatory gates are blocked."}
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "release": "v1.0.0-rc.1",
+  "commit": "8afe6afa105b35f485d348344952be87d7f93bc7",
+  "branch": "feat/pr-021-release-candidate-validation",
+  "node": "v22.16.0",
+  "npm": "10.9.2",
+  "generatedAtUtc": "2026-07-26T07:35:07Z"
+}

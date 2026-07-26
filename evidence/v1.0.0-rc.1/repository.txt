@@ -1,0 +1,31 @@
+release=v1.0.0-rc.1
+commit=8afe6afa105b35f485d348344952be87d7f93bc7
+branch=feat/pr-021-release-candidate-validation
+generated_at_utc=2026-07-26T07:35:07Z
+
+[git-status]
+?? docs/releases/
+?? evidence/
+?? scripts/release/
+
+[recent-history]
+8afe6af docs(ops): record production readiness execution status
+de1164c fix(security): avoid scanning detector definitions
+ff2f0c6 test(platform): add e2e performance and security pipelines
+b5c3ad8 chore(ops): add production readiness gates and runbooks
+06dfbff chore(history): reconcile PR-008 asset library
+342964b chore(history): reconcile PR-007 observability operations
+a25469d chore(history): reconcile PR-006 application shell
+bd428d4 feat(approvals): add editorial approval workflow
+2c4f719 feat(reviews): add comments and canvas annotations
+bd00056 fix(repo): use npm-compatible workspace ranges
+87423b4 feat(editor): add precision tools and revision history
+be93b3b feat(editor): add visual spread editor foundation
+9edabdf feat(books): add book management foundation
+2b374d8 feat(rbac): add policy engine and role administration
+68c7578 feat(tenancy): enforce request context and tenant isolation
+895b4e0 feat(auth): implement email password session lifecycle
+74ba8e6 feat(identity): establish tenancy and authorization foundation
+a273fca chore(repo): bootstrap development environment
+951f809 fix(container): include web public directory
+47f3ce7 ci(release): add verified artifact pipeline
